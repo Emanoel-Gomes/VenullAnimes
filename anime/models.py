@@ -71,10 +71,28 @@ class Anime(models.Model):
     thumb = models.ImageField(upload_to='thumb_animes')
     background = models.ImageField(upload_to='bg_animes')
     tipo = models.CharField(max_length=10, choices=LISTA_TIPO)
-    generos = models.CharField(max_length=18, choices=LISTA_GENEROS)
     temporada = models.CharField(max_length=10, choices=LISTA_TEMPORADAS)
     visualizacoes = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.titulo
+
+# Episódios
+class Episodio(models.Model):
+    anime = models.ForeignKey("Anime", related_name="episodios", on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=100)
+    video = models.URLField()
+    
+    def __str__(self):
+        return self.titulo
+    
+
+# Generos
+class Genero(models.Model):
+    anime = models.ForeignKey("Anime", related_name="generos", on_delete=models.CASCADE)
+    generos = models.CharField(max_length=18, choices=LISTA_GENEROS)
+    
+    def __str__(self):
+        return self.generos
+    

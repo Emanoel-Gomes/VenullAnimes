@@ -24,3 +24,9 @@ class DetalhesAnime(DetailView):
     template_name = "detalhesAnime.html"
     model = Anime
     #object é 1 item do nosso modelo
+
+    def get_context_data(self, **kwargs):
+        context = super(DetalhesAnime, self).get_context_data(**kwargs)
+        animes_relacionados = Anime.objects.filter(generos__generos=self.get_object().generos.first()).exclude(pk=self.get_object().pk)
+        context["animes_relacionados"] = animes_relacionados
+        return context
