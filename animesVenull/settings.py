@@ -63,6 +63,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'anime.novos_context.lista_animes_recentes',
+                'anime.novos_context.lista_animes_emalta',
+
             ],
         },
     },

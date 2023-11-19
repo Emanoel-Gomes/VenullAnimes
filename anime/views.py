@@ -1,3 +1,5 @@
+from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Anime
 from django.views.generic import TemplateView, ListView, DetailView
@@ -24,6 +26,15 @@ class DetalhesAnime(DetailView):
     template_name = "detalhesAnime.html"
     model = Anime
     #object é 1 item do nosso modelo
+
+    def get(self, request, *args, **kwargs):
+        #selecionar o anime
+        anime = self.get_object()
+        #contar +1 na visalização
+        anime.visualizacoes += 1
+        #salvar
+        anime.save()
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(DetalhesAnime, self).get_context_data(**kwargs)
