@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Homepage Venullanime
+{% endblock %}
+
+{% block content %}
+<div class="py-20">
+    <h1>Esse é o detalhe do anime: {{ object.titulo }}</h1>
+    <p>{{ object }}</p>
+    <p>{{ object.sinopse}}</p>
+    <img src="{{ object.thumb.url }}">
+</div>
+
+{% endblock %}

@@ -5,5 +5,13 @@ Homepage Venullanime
 {% endblock %}
 
 {% block content %}
-<h1>Essa  é a Homepage do site</h1>
+<div class="py-20">
+    <h1>lista</h1>
+    {% for anime in object_list %}
+        <a href="{% url 'anime:detalhesAnime' anime.id %}">
+            <p>{{ anime }}</p>
+        </a>
+    {% endfor %}
+</div>
+
 {% endblock %}
