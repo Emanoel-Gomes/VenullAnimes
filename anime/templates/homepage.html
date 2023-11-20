@@ -43,11 +43,11 @@ V-animes
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for episodio in lista_episodios_recentes %}
             <div class="bg-gray-800 p-4 rounded-md">
-                <a href="{% url 'anime:detalhesAnime' episodio.anime.id %}">
+                <a href="{{ episodio.video }}">
                     <img src="{{ episodio.thumb_episodio.url }}" alt="{{ episodio.titulo }}" class="w-full h-40 object-cover mb-2 rounded-md">
                 </a>
                 <h3 class="text-lg font-semibold">
-                    <a href="{% url 'anime:detalhesAnime' episodio.anime.id %}" class="text-blue-500 hover:underline">{{ episodio.titulo }}</a>
+                    <a href="{{ episodio.video }}" class="text-blue-500 hover:underline">{{ episodio.titulo }}</a>
                 </h3>
             </div>
         {% endfor %}

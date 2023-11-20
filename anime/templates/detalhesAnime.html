@@ -37,8 +37,9 @@
             <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {% for episodio in object.episodios.all %}
                     <li class="bg-gray-800 p-4 rounded-md">
-                        <img src="{{ episodio.thumb_episodio.url }}" alt="{{ episodio.titulo }}" class="w-full h-40 object-cover mb-2 rounded-md">
-                        <h3 class="text-lg font-semibold">{{ episodio.titulo }}</h3>
+                        <a href="{{ episodio.video }}"><img src="{{ episodio.thumb_episodio.url }}" alt="{{ episodio.titulo }}" class="w-full h-40 object-cover mb-2 rounded-md"></a>
+                        <a href="{{ episodio.video }}"><h3 class="text-lg font-semibold">{{ episodio.titulo }}</h3></a>
+                        <p>{{ episodio.video.url }}</p>
                         
                     </li>
                 {% endfor %}
