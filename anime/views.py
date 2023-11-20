@@ -13,7 +13,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 #    return render(request, "index.html",context)
 
 class Homepage(ListView):
-    template_name = "index.html"
+    template_name = "homepage.html"
     model = Anime
     #object_view é a lista de itens do modelo
 

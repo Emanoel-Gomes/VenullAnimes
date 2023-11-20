@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'anime.novos_context.lista_animes_recentes',
                 'anime.novos_context.lista_animes_emalta',
+                'anime.novos_context.lista_episodios_recentes',
 
             ],
         },

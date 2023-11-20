@@ -4,7 +4,7 @@ from .views import Homepage,DetalhesAnime,ListaAnimes
 
 app_name = 'anime'
 urlpatterns = [
-    path('', Homepage.as_view(),name='index'),
+    path('', Homepage.as_view(),name='homepage'),
     path('animes/', ListaAnimes.as_view(),name='animes'),
     path('animes/<int:pk>', DetalhesAnime.as_view(),name='detalhesAnime'),
     #path('animes/', include('anime.urls'))

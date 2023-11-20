@@ -69,7 +69,6 @@ class Anime(models.Model):
     classificacao = models.IntegerField(choices=LISTA_CLASSIFICACOES)
     distribuidora = models.CharField(max_length=50)
     thumb = models.ImageField(upload_to='thumb_animes')
-    background = models.ImageField(upload_to='bg_animes')
     tipo = models.CharField(max_length=10, choices=LISTA_TIPO)
     temporada = models.CharField(max_length=10, choices=LISTA_TEMPORADAS)
     visualizacoes = models.IntegerField(default=0)
@@ -83,6 +82,8 @@ class Episodio(models.Model):
     anime = models.ForeignKey("Anime", related_name="episodios", on_delete=models.CASCADE)
     titulo = models.CharField(max_length=100)
     video = models.URLField()
+    data_criacao = models.DateTimeField(default=timezone.now)
+    thumb_episodio = models.ImageField(upload_to='thumb_episodios', default='default_thumb.jpg')
     
     def __str__(self):
         return self.titulo
