@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 #Generos (tupla); a primeira parte é o que será armazenado no bd
