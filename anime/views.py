@@ -41,3 +41,16 @@ class DetalhesAnime(DetailView):
         animes_relacionados = Anime.objects.filter(generos__generos=self.get_object().generos.first()).exclude(pk=self.get_object().pk)
         context["animes_relacionados"] = animes_relacionados
         return context
+
+class PesquisaAnime(ListView):
+    template_name = "pesquisa.html"
+    model = Anime
+
+    #editando o object_list da classe PesquisaAnime
+    def get_queryset(self):
+        pesquisa = self.request.GET.get('q')
+        if pesquisa:
+            object_list = self.model.objects.filter(titulo__contains=pesquisa)
+            return object_list
+        else:
+            return None

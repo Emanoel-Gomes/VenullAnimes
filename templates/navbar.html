@@ -30,8 +30,9 @@
             <ion-icon name="albums-outline"></ion-icon>
         </div>
         <div class="mr-4">
-            <form>
-                <input type="text" placeholder="Pesquisar... " class="py-1 px-2 rounded-md text-black">
+            <form method="get" action="{% url 'anime:pesquisaAnime' %}">
+                <input type="text" placeholder="Pesquisar... " class="py-1 px-2 rounded-md text-black" name="q" value="{{ request.GET.q }}">
+                <input type="submit" value=""> 
                 <ion-icon name="search-outline"></ion-icon>
             </form>
         </div>
