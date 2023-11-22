@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="w-5/12 flex flex-nowrap justify-end items-center">
+    <div class="w-5/12 flex flex-nowrap justify-end items-center relative">
         <div class="mr-4 text-2xl">
             <ion-icon name="notifications-outline"></ion-icon>
         </div>
@@ -37,8 +37,70 @@
             </form>
         </div>
         
-        <div class="mr-4 text-4xl">
+        <div class="mr-4 text-4xl cursor-pointer" id="userIcon">
             <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        
+        <!-- Lista de opções do usuário -->
+        <div id="userOptions" class="hidden absolute right-0 top-full mt-3 bg-gray-900 p-2 text-white z-50">
+            <div>
+                <ul>
+                    <li class="login-option">
+                        <a href="#">
+                            <h2>Criar Conta</h2>
+                            <p>Torne-se parte da nossa equipe</p>
+                        </a>
+                    </li>
+                    <li class="login-option">
+                        <a href="#">
+                            <h2>Login</h2>
+                            <p>Já faz parte da equipe? Bem-vindo de volta!</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
+
+<!-- Overlay -->
+<div id="overlay" class="hidden fixed inset-0 bg-black opacity-50 z-40"></div>
+
+<script>
+    // Adiciona um evento de clique ao ícone do usuário
+    document.getElementById('userIcon').addEventListener('click', function(e) {
+        e.stopPropagation(); // Impede que o clique se propague para o documento
+
+        // Alterna a visibilidade da lista de opções do usuário
+        var userOptions = document.getElementById('userOptions');
+        userOptions.classList.toggle('hidden');
+
+        // Alterna a visibilidade do overlay
+        var overlay = document.getElementById('overlay');
+        overlay.classList.toggle('hidden');
+    });
+
+    // Fecha o menu do usuário e o overlay ao clicar fora do menu
+    document.addEventListener('click', function() {
+        var userOptions = document.getElementById('userOptions');
+        var overlay = document.getElementById('overlay');
+        
+        if (!userOptions.classList.contains('hidden')) {
+            userOptions.classList.add('hidden');
+            overlay.classList.add('hidden');
+        }
+    });
+
+    // Adiciona eventos de mouseover e mouseout para mudar a cor de fundo ao passar o mouse sobre as opções de login
+    var loginOptions = document.querySelectorAll('.login-option');
+
+    loginOptions.forEach(function(option) {
+        option.addEventListener('mouseover', function() {
+            this.classList.add('bg-gray-700');
+        });
+
+        option.addEventListener('mouseout', function() {
+            this.classList.remove('bg-gray-700');
+        });
+    });
+</script>
