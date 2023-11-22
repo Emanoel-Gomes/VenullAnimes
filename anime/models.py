@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 #Generos (tupla); a primeira parte é o que será armazenado no bd
@@ -97,4 +97,10 @@ class Genero(models.Model):
     
     def __str__(self):
         return self.generos
+    
+class Usuario(AbstractUser):
+    animes_vistos = models.ManyToManyField("Anime", related_name="animes_vistos")
+    assistir_depois = models.ManyToManyField("Anime", related_name="assistir_depois")
+    assistindo = models.ManyToManyField("Anime", related_name="assistindo")
+    episodios_vistos = models.ManyToManyField("Episodio")
     
