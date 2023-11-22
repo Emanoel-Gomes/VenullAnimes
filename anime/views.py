@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from .models import Anime
 from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -11,6 +12,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 #    lista_animes = Anime.objects.all()
 #    context['lista_animes'] = lista_animes
 #    return render(request, "index.html",context)
+
 
 class Homepage(ListView):
     template_name = "homepage.html"
