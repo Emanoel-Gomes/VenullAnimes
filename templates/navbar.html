@@ -23,12 +23,17 @@
     </div>
 
     <div class="w-5/12 flex flex-nowrap justify-end items-center relative">
+        {% if user.is_authenticated %}
         <div class="mr-4 text-2xl">
             <ion-icon name="notifications-outline"></ion-icon>
         </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
         <div class="mr-4 text-2xl">
             <ion-icon name="albums-outline"></ion-icon>
         </div>
+        {% endif %}
         <div class="mr-4">
             <form method="get" action="{% url 'anime:pesquisaAnime' %}">
                 <input type="text" placeholder="Pesquisar... " class="py-1 px-2 rounded-md text-black" name="q" value="{{ request.GET.q }}">
@@ -40,7 +45,27 @@
         <div class="mr-4 text-4xl cursor-pointer" id="userIcon">
             <ion-icon name="person-circle-outline"></ion-icon>
         </div>
-        
+
+        {% if user.is_authenticated %}
+        <!-- Lista de opções do usuário logado -->
+        <div id="userOptions" class="hidden absolute right-0 top-full mt-3 bg-gray-900 p-2 text-white z-50">
+            <div>
+                <ul>
+                    <li class="login-option">
+                        <a href="#">
+                            <h2>Meu Perfil</h2>
+                        </a>
+                    </li>
+                    <li class="login-option">
+                        <a href="#">
+                            <h2>Sair</h2>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {% else %}
         <!-- Lista de opções do usuário -->
         <div id="userOptions" class="hidden absolute right-0 top-full mt-3 bg-gray-900 p-2 text-white z-50">
             <div>
@@ -60,6 +85,7 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
     </div>
 </nav>
 
