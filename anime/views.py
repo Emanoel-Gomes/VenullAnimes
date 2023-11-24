@@ -56,3 +56,10 @@ class PesquisaAnime(ListView):
             return object_list
         else:
             return None
+
+class EditarPerfil(LoginRequiredMixin, TemplateView):
+    template_name = "editarPerfil.html"
+
+
+class Cadastrar(TemplateView):
+    template_name = "cadastrar.html"

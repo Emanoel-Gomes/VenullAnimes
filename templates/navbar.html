@@ -52,12 +52,12 @@
             <div>
                 <ul>
                     <li class="login-option">
-                        <a href="#">
+                        <a href="{% url 'anime:editarPerfil' %}">
                             <h2>Meu Perfil</h2>
                         </a>
                     </li>
                     <li class="login-option">
-                        <a href="#">
+                        <a href="{% url 'anime:logout' %}">
                             <h2>Sair</h2>
                         </a>
                     </li>
@@ -71,13 +71,13 @@
             <div>
                 <ul>
                     <li class="login-option">
-                        <a href="#">
+                        <a href="{% url 'anime:cadastrar' %}">
                             <h2>Criar Conta</h2>
                             <p>Torne-se parte da nossa equipe</p>
                         </a>
                     </li>
                     <li class="login-option">
-                        <a href="#">
+                        <a href="{% url 'anime:logout' %}">
                             <h2>Login</h2>
                             <p>Já faz parte da equipe? Bem-vindo de volta!</p>
                         </a>
