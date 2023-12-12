@@ -4,32 +4,31 @@
 {{ object.titulo }}
 {% endblock %}
 
-{% block content %}
+{% block content %}  
 <div class="container mx-auto mt-8 py-20">
     <!-- Seção 1: Informações Gerais -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="flex flex-col md:flex-row gap-5">
         <!-- Subseção 1.1: Foto do Anime -->
         <div>
-            <img src="{{ object.thumb.url }}" alt="{{ object.titulo }}" class="w-full h-auto mb-4 rounded-md shadow-md">
+            <img src="{{ object.thumb.url }}" alt="{{ object.titulo }}" class="w-auto h-auto mb-4 rounded-md shadow-md">
         </div>
         
         <!-- Subseção 1.2: Informações Gerais -->
-        <div>
-            <h2 class="text-3xl font-semibold mb-4">Informações Gerais</h2>
+        <div class="flex-1">
+            <h2 class="text-3xl font-semibold mb-4">{{ object.titulo }}</h2>
             <p class="text-gray-400 mb-2">Distribuidora: {{ object.distribuidora }}</p>
             <p class="text-gray-400 mb-2">Tipo: {{ object.tipo }}</p>
-            <p class="text-gray-400 mb-2">Genero:{% for genero in object.generos.all %} {{ genero }} {% endfor %}</p>
+            <p class="text-gray-400 mb-2">Gênero:{% for genero in object.generos.all %} {{ genero }} {% endfor %}</p>
             <p class="text-gray-400 mb-2">Temporada: {{ object.temporada }}</p>
             <p class="text-gray-400 mb-2">Classificação: {{ object.classificacao }}</p>
             <p class="text-gray-400 mb-2">Visualizações: {{ object.visualizacoes }}</p>
             <p class="text-gray-400 mb-2">Data de Criação: {{ object.data_criacao|date:"Y" }}</p>
             <br>
-            <h3>Sinopse</h3>
-            <p class="text-gray-500 mt-4">{{ object.sinopse }}</p>
             <!-- Adicione mais informações conforme necessário -->
         </div>
     </div>
-
+    <h3>Sinopse</h3>
+    <p class="text-gray-500 mt-4">{{ object.sinopse }}</p>
     <!-- Seção 2: Episódios -->
     <div class="mt-8">
         <h2 class="text-3xl font-semibold mb-4">Episódios</h2>
@@ -48,6 +47,7 @@
             <p class="text-gray-500">Nenhum episódio disponível.</p>
         {% endif %}
     </div>
+    <!-- Seção 3: Animes Relacionados -->
     <div class="mt-8">
         <h2 class="text-3xl font-semibold mb-4">Animes Relacionados</h2>
         {% if animes_relacionados.all %}
@@ -63,5 +63,6 @@
         {% else %}
             <p class="text-gray-500">Nenhum anime relacionado.</p>
         {% endif %}
-    </div>    
+    </div>
+</div>
 {% endblock %}
