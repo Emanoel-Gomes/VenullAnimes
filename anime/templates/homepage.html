@@ -6,52 +6,58 @@ V-animes
 
 {% block content %}
 <div class="container mx-auto mt-8 py-20">
-    <h2 class="text-3xl font-semibold mb-4">Animes Recentes</h2>
-<!-- Seção de Animes Recentes --> 
-<div class="flex flex-wrap gap-4">
-    {% for anime in lista_animes_recentes %}
-        <div class="bg-gray-800 p-4 rounded-md w-full sm:w-1/2 md:w-1/3 lg:w-1/5">
-            <a href="{% url 'anime:detalhesAnime' anime.id %}">
-                <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
-            </a>
-            <h3 class="text-lg font-semibold text-center">
-                <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:underline">{{ anime.titulo }}</a>
-            </h3>
-            <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
-        </div>
-    {% endfor %}
-</div>
+    <!-- Seção de Animes Recentes --> 
+    <div class="flex items-center justify-between mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Animes Recentes</h2>
+        <a href="{% url 'anime:animes' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
+    </div>
+    <div class="flex flex-wrap gap-4 justify-center">
+        {% for anime in lista_animes_recentes %}
+            <div class="p-4 rounded-md w-full sm:w-1/2 lg:w-1/6">
+                <a href="{% url 'anime:detalhesAnime' anime.id %}">
+                    <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
+                </a>
+                <h3 class="text-lg font-semibold text-center">
+                    <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:no-underline focus:no-underline">{{ anime.titulo }}</a>
+                </h3>
+                <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
-
-    <h2 class="text-3xl font-semibold mt-8 mb-4">Animes em Alta</h2>
-    <!-- Seção de Animes em Alta -->
-<div class="flex flex-wrap gap-4">
-    {% for anime in lista_animes_emalta %}
-        <div class="bg-gray-800 p-4 rounded-md w-full sm:w-1/2 md:w-1/3 lg:w-1/5">
-            <a href="{% url 'anime:detalhesAnime' anime.id %}">
-                <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
-            </a>
-            <h3 class="text-lg font-semibold text-center">
-                <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:underline">{{ anime.titulo }}</a>
-            </h3>
-            <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
-        </div>
-    {% endfor %}
-</div>
-
-
-
-    <h2 class="text-3xl font-semibold mt-8 mb-4">Novos Episódios</h2>
     <!-- Seção de Novos Episódios -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="flex items-center justify-between mt-8 mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Novos Episódios</h2>
+        <a href="{% url 'anime:animes' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center px-20">
         {% for episodio in lista_episodios_recentes %}
-            <div class="bg-gray-800 p-4 rounded-md">
+            <div class="p-4 rounded-md">
                 <a href="{{ episodio.video }}">
                     <img src="{{ episodio.thumb_episodio.url }}" alt="{{ episodio.titulo }}" class="w-full h-40 object-cover mb-2 rounded-md">
                 </a>
                 <h3 class="text-lg font-semibold">
-                    <a href="{{ episodio.video }}" class="text-blue-500 hover:underline">{{ episodio.titulo }}</a>
+                    <a href="{{ episodio.video }}" class="text-blue-500 hover:no-underline focus:no-underline">{{ episodio.titulo }}</a>
                 </h3>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Seção de Animes em Alta -->
+    <div class="flex items-center justify-between mt-8 mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Animes em Alta</h2>
+        <a href="{% url 'anime:animes' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
+    </div>
+    <div class="flex flex-wrap gap-4 justify-center">
+        {% for anime in lista_animes_emalta %}
+            <div class="p-4 rounded-md w-full sm:w-1/2 lg:w-1/6">
+                <a href="{% url 'anime:detalhesAnime' anime.id %}">
+                    <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
+                </a>
+                <h3 class="text-lg font-semibold text-center">
+                    <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:no-underline focus:no-underline">{{ anime.titulo }}</a>
+                </h3>
+                <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
             </div>
         {% endfor %}
     </div>
