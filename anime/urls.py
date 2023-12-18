@@ -1,12 +1,13 @@
 # url - view - template
 from django.urls import path,include
-from .views import Homepage,DetalhesAnime,ListaAnimes,PesquisaAnime,EditarPerfil,Cadastrar
+from .views import Homepage,DetalhesAnime,ListaAnimes,PesquisaAnime,EditarPerfil,Cadastrar,ListaEpisodios
 from django.contrib.auth import views as auth_view
 
 app_name = 'anime'
 urlpatterns = [
     path('', Homepage.as_view(),name='homepage'),
     path('animes/', ListaAnimes.as_view(),name='animes'),
+    path('episodios/', ListaEpisodios.as_view(),name='episodios'),
     path('animes/<int:pk>', DetalhesAnime.as_view(),name='detalhesAnime'),
     path('pesquisa/', PesquisaAnime.as_view(),name='pesquisaAnime'),
     path('perfil/', EditarPerfil.as_view(),name='editarPerfil'),

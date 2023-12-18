@@ -28,7 +28,7 @@ V-animes
     <!-- Seção de Novos Episódios -->
     <div class="flex items-center justify-between mt-8 mb-4 px-20">
         <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Novos Episódios</h2>
-        <a href="{% url 'anime:animes' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
+        <a href="{% url 'anime:episodios' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center px-20">
         {% for episodio in lista_episodios_recentes %}

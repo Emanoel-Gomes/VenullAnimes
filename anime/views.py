@@ -24,6 +24,11 @@ class ListaAnimes(ListView):
     model = Anime
     #object_view é a lista de itens do modelo
 
+class ListaEpisodios(ListView):
+    template_name = "episodios.html"
+    model = Anime
+    #object_view é a lista de itens do modelo
+
 class DetalhesAnime(DetailView):
     template_name = "detalhesAnime.html"
     model = Anime

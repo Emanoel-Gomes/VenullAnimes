@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Episodios
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 py-20">
+    <!-- Seção de Novos Episódios -->
+    <div class="flex items-center justify-between mt-8 mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Episódios</h2>
+        <a href="{% url 'anime:episodios' %}" class="border-b-2 border-solid border-blue-500">Ver Todos</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center px-20">
+        {% for episodio in lista_episodios_recentes %}
+            <div class="p-4 rounded-md">
+                <a href="{{ episodio.video }}">
+                    <img src="{{ episodio.thumb_episodio.url }}" alt="{{ episodio.titulo }}" class="w-full h-40 object-cover mb-2 rounded-md">
+                </a>
+                <h3 class=" font-semibold">
+                    <a href="{{ episodio.video }}" class="text-blue-500 hover:no-underline focus:no-underline">{{ episodio.titulo }}</a>
+                </h3>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
