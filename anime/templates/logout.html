@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block titulo %}
-Fazer Login
+Logout
 {% endblock %}
 
 {% block content %}
-    logout
+<div class="container mx-auto flex items-center justify-center h-screen flex-col">
+    <div class="text-3xl font-semibold mb-4">
+        Você foi desconectado
+    </div>
+
+    <div class="flex justify-center mt-8">
+        <a href="{% url 'anime:cadastrar' %}" class="bg-blue-500 text-white py-2 px-4 rounded-md mx-2 hover:bg-blue-600">Cadastrar Conta</a>
+        <a href="{% url 'anime:login' %}" class="bg-green-500 text-white py-2 px-4 rounded-md mx-2 hover:bg-green-600">Login</a>
+    </div>
+</div>
 {% endblock %}
