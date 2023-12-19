@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Animes do Gênero {{ genero }}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 py-20">
+    <h2>Animes do Gênero {{ genero }}:</h2>
+        {% if animes %}
+            <ul>
+            {% for anime in animes %}
+                <li>{{ anime.titulo }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum anime encontrado para este gênero.</p>
+        {% endif %}
+</div>
+{% endblock %}

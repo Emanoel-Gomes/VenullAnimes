@@ -10,13 +10,16 @@
         <div class="w-5/12">
             <ul class="flex justify-between">
                 <li>
-                    <a href="#">Lista Animes</a>
+                    <a href="{% url 'anime:animes' %}">Lista Animes</a>
                 </li>
                 <li>
-                    <a href="#">Temporadas</a>
+                    <a href="{% url 'anime:temporada' %}">Temporadas</a>
                 </li>
                 <li>
-                    <a href="#">Generos</a>
+                    <a href="{% url 'anime:lista_generos' %}">Generos</a>
+                </li>
+                <li>
+                    <a href="{% url 'anime:calendario' %}">Calendário</a>
                 </li>
             </ul>
         </div>

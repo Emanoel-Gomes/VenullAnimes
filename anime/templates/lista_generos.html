@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Lista de Gêneros
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 py-20">
+  <h2>Escolha um gênero:</h2>
+  <ul>
+    {% for genero in generos %}
+      <li><a href="{% url 'anime:lista_por_genero' genero.0 %}">{{ genero.1 }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

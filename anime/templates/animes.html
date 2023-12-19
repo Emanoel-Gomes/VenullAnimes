@@ -1,11 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Aqui será exibido a lista de todos os animes</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block titulo %}
+Lista Animes
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 py-20">
+    <!-- Seção de Animes Recentes --> 
+    <div class="flex items-center justify-between mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Animes</h2>
+    </div>
+    <div class="flex flex-wrap gap-4 justify-center">
+        {% for anime in lista_animes_recentes %}
+            <div class="p-4 rounded-md w-full sm:w-1/2 lg:w-1/6">
+                <a href="{% url 'anime:detalhesAnime' anime.id %}">
+                    <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
+                </a>
+                <h3 class="text-lg font-semibold text-center">
+                    <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:no-underline focus:no-underline">{{ anime.titulo }}</a>
+                </h3>
+                <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
