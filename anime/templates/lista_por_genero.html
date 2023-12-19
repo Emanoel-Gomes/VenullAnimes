@@ -6,15 +6,25 @@ Animes do Gênero {{ genero }}
 
 {% block content %}
 <div class="container mx-auto mt-8 py-20">
-    <h2>Animes do Gênero {{ genero }}:</h2>
+    <div class="flex items-center justify-between mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Animes do Gênero {{ genero }}</h2>
+    </div>
+    <div class="flex flex-wrap gap-4 justify-center">
         {% if animes %}
-            <ul>
-            {% for anime in animes %}
-                <li>{{ anime.titulo }}</li>
-            {% endfor %}
-            </ul>
+        {% for anime in animes %}
+            <div class="p-4 rounded-md w-full sm:w-1/2 lg:w-1/6">
+                <a href="{% url 'anime:detalhesAnime' anime.id %}">
+                    <img src="{{ anime.thumb.url }}" alt="{{ anime.titulo }}" class="w-full h-auto object-cover mb-2 rounded-md">
+                </a>
+                <h3 class="text-lg font-semibold text-center">
+                    <a href="{% url 'anime:detalhesAnime' anime.id %}" class="text-blue-500 hover:no-underline focus:no-underline">{{ anime.titulo }}</a>
+                </h3>
+                <p class="text-xs text-gray-500 mt-2 text-center">Classificação: {{ anime.classificacao }}<br> Temporada: {{ anime.temporada }}</p>
+            </div>
+        {% endfor %}
         {% else %}
             <p>Nenhum anime encontrado para este gênero.</p>
         {% endif %}
+    </div>
 </div>
 {% endblock %}
