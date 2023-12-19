@@ -13,7 +13,7 @@ Lista Animes
             <form method="get" action="{% url 'anime:animes' %}">
                 {% csrf_token %}
                 <label for="genero">Gênero:</label>
-                <select name="genero" id="genero">
+                <select class="bg-gray-800" name="genero" id="genero">
                     <option value="">Todos</option>
                     {% for value, label in generos %}
                         <option value="{{ value }}" {% if value == genero_filtrado %}selected{% endif %}>{{ label }}</option>
@@ -21,7 +21,7 @@ Lista Animes
                 </select>
             
                 <label for="tipo">Tipo:</label>
-                <select name="tipo" id="tipo">
+                <select class="bg-gray-800" name="tipo" id="tipo">
                     <option value="">Todos</option>
                     {% for value, label in tipos %}
                         <option value="{{ value }}" {% if value == tipo_filtrado %}selected{% endif %}>{{ label }}</option>
@@ -29,7 +29,7 @@ Lista Animes
                 </select>
             
                 <label for="ano">Ano:</label>
-                <select name="ano" id="ano">
+                <select class="bg-gray-800" name="ano" id="ano">
                     <option value="">Todos</option>
                     {% for year in anos %}
                         <option value="{{ year.year }}" {% if year.year == ano_filtrado %}selected{% endif %}>{{ year.year }}</option>
