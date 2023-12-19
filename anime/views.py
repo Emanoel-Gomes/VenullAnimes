@@ -1,7 +1,7 @@
 from typing import Any
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from .models import Anime, Genero, LISTA_GENEROS, DIAS_SEMANA
+from .models import Anime, Genero, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
@@ -52,10 +52,44 @@ class Homepage(ListView):
     model = Anime
     #object_view é a lista de itens do modelo
 
+# Em sua view ListaAnimes
 class ListaAnimes(ListView):
     template_name = "animes.html"
     model = Anime
-    #object_view é a lista de itens do modelo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['generos'] = LISTA_GENEROS
+        context['tipos'] = LISTA_TIPO
+        context['anos'] = Anime.objects.dates('data_criacao', 'year', order='DESC')
+
+        # Adicione as seguintes linhas para garantir que os valores de filtro sejam mantidos
+        context['genero_filtrado'] = self.request.GET.get('genero', '')
+        context['tipo_filtrado'] = self.request.GET.get('tipo', '')
+        context['ano_filtrado'] = self.request.GET.get('ano', '')
+
+        return context
+
+    def get_queryset(self):
+        genero = self.request.GET.get('genero')
+        tipo = self.request.GET.get('tipo')
+        ano = self.request.GET.get('ano')
+
+        queryset = Anime.objects.all()
+
+        if genero:
+            queryset = queryset.filter(generos__generos=genero)
+
+        if tipo:
+            queryset = queryset.filter(tipo=tipo)
+
+        if ano:
+            queryset = queryset.filter(data_criacao__year=ano)
+
+        return queryset
+
+
+
 
 class ListaEpisodios(ListView):
     template_name = "episodios.html"
