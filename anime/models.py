@@ -43,6 +43,17 @@ LISTA_GENEROS = (
     ("YURI","Yuri"),
 )
 
+DIAS_SEMANA = (
+    ("SEGUNDA","Segunda"),
+    ("TERCA","Terca"),
+    ("QUARTA","Quarta"),
+    ("QUINTA","Quinta"),
+    ("SEXTA","Sexta"),
+    ("SABADO","Sabado"),
+    ("DOMINGO","Domingo"),
+)
+
+
 LISTA_CLASSIFICACOES = (
     (10,10),
     (12,12),
@@ -72,6 +83,7 @@ class Anime(models.Model):
     thumb = models.ImageField(upload_to='thumb_animes')
     tipo = models.CharField(max_length=10, choices=LISTA_TIPO)
     temporada = models.CharField(max_length=10, choices=LISTA_TEMPORADAS)
+    dia_semana = models.CharField(default="SEGUNDA", max_length=8, choices=DIAS_SEMANA)
     visualizacoes = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
 

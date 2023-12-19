@@ -1,7 +1,7 @@
 from typing import Any
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from .models import Anime, Genero, LISTA_GENEROS
+from .models import Anime, Genero, LISTA_GENEROS, DIAS_SEMANA
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
@@ -9,6 +9,27 @@ from django.shortcuts import render
 from django.views import View
 
 # ...
+class Calendario(View):
+    template_name = "calendario.html"
+
+    def get(self, request, *args, **kwargs):
+        # Obtém a lista de animes para cada dia da semana
+        animes_por_dia = {dia[0]: Anime.objects.filter(dia_semana=dia[0]) for dia in DIAS_SEMANA}
+        
+        # Obtém o dia selecionado (se houver)
+        dia_selecionado = request.GET.get('dia', None)
+        
+        # Obtém os animes correspondentes ao dia selecionado
+        animes_selecionados = animes_por_dia.get(dia_selecionado, []) if dia_selecionado else []
+
+        context = {
+            'animes_por_dia': animes_por_dia,
+            'dia_selecionado': dia_selecionado,
+            'animes_selecionados': animes_selecionados,
+        }
+
+        return render(request, self.template_name, context)
+
 
 class ListaGeneros(View):
     template_name = "lista_generos.html"
@@ -40,11 +61,7 @@ class ListaEpisodios(ListView):
     template_name = "episodios.html"
     model = Anime
     #object_view é a lista de itens do modelo
-    
-class Calendario(ListView):
-    template_name = "calendario.html"
-    model = Anime
-    #object_view é a lista de itens do modelo
+
 
 class Temporada(ListView):
     template_name = "temporada.html"
