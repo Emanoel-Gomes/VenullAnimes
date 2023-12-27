@@ -1,10 +1,8 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from .models import Anime, Genero, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO
-from django.views.generic import TemplateView, ListView, DetailView
+from .models import Anime, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO
+from .forms import CriarContaForm
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views import View
 
@@ -139,5 +137,6 @@ class EditarPerfil(LoginRequiredMixin, TemplateView):
     template_name = "editarPerfil.html"
 
 
-class Cadastrar(TemplateView):
+class Cadastrar(FormView):
     template_name = "cadastrar.html"
+    form_class = CriarContaForm
