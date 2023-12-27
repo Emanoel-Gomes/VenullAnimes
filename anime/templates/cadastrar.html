@@ -6,22 +6,28 @@ Cadastro
 {% endblock %}
 
 {% block content %}
-<div class="container mx-auto flex items-center justify-center h-screen">
-    <form class="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-lg" method="post">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            {{ form|crispy }}
-        </fieldset>
+<div class="container mx-auto py-20"></div>
+    <div class="container mx-auto flex items-center justify-center h-screen">
+        <form class="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-lg" method="post">
+            {% csrf_token %}
+            <div class="text-3xl font-semibold mb-4 text-center">
+                Cadastro
+            </div>
         
-        <div class="flex items-center justify-center mb-6">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Criar
-            </button>
-        </div>
-        <div class="text-center text-gray-500">
-            Já possui uma conta? <a href="{% url 'anime:login' %}" class="text-blue-500 hover:underline">Faça login</a>.
-        </div>
-    </form>
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            
+            <div class="flex items-center justify-center mb-6">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Criar
+                </button>
+            </div>
+            <div class="text-center text-gray-500">
+                Já possui uma conta? <a href="{% url 'anime:login' %}" class="text-blue-500 hover:underline">Faça login</a>.
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
