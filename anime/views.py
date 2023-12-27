@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from .models import Anime, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO
 from .forms import CriarContaForm
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views import View
 
 # ...
@@ -140,3 +139,10 @@ class EditarPerfil(LoginRequiredMixin, TemplateView):
 class Cadastrar(FormView):
     template_name = "cadastrar.html"
     form_class = CriarContaForm
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('anime:login')

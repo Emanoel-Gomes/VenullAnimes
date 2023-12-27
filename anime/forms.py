@@ -11,7 +11,6 @@ class FiltroAnimeForm(forms.Form):
 class CriarContaForm(UserCreationForm):
     email = forms.EmailField()
 
-
     class Meta:
         model = Usuario
         fields = ('username', 'email', 'password1','password2')
