@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Animes Vistos
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 py-20">
+    <!-- Seção de Animes Recentes --> 
+    <div class="flex items-center justify-between mb-4 px-20">
+        <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Animes Vistos</h2>
+    </div>
+    <div class="flex flex-wrap gap-4 justify-center">
+        {% if request.user.animes_vistos.all %}
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {% for anime_visto in request.user.animes_vistos.all %}
+                <li class="p-4 rounded-md">
+                    <a href="{% url 'anime:detalhesAnime' anime_visto.id %}">
+                        <img src="{{ anime_visto.thumb.url }}" alt="{{ anime_visto.titulo }}" class="w-full object-cover mb-2 rounded-md">
+                    </a>
+                    <h3 class="text-lg font-semibold text-center">
+                        <a href="{% url 'anime:detalhesAnime' anime_visto.id %}" class="text-blue-500 hover:no-underline focus:no-underline">{{ anime_visto.titulo }}</a>
+                    </h3>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-500">Você ainda não marcou nenhum anime como visto.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

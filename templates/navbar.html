@@ -55,15 +55,18 @@
             <div>
                 <ul>
                     <li class="login-option">
-                        <a href="{% url 'anime:editarPerfil' %}">
+                        <a href="{% url 'anime:editarperfil' user.pk %}">
                             <h2>Meu Perfil</h2>
                         </a>
                     </li>
-                    <li class="login-option">
-                        <a href="{% url 'anime:logout' %}">
-                            <h2>Sair</h2>
-                        </a>
-                    </li>
+                    <form method="post" action="{% url 'anime:logout' %}" id="logoutForm">
+                        {% csrf_token %}
+                        <li class="login-option">
+                            <a href="#" onclick="document.getElementById('logoutForm').submit();">
+                                <h2>Sair</h2>
+                            </a>
+                        </li>
+                    </form>
                 </ul>
             </div>
         </div>

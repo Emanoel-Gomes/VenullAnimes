@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, reverse
-from .models import Anime, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from .models import Anime, LISTA_GENEROS, DIAS_SEMANA, LISTA_TIPO, Usuario
 from .forms import CriarContaForm
-from django.views.generic import TemplateView, ListView, DetailView, FormView
+from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-
+from django.contrib.auth.decorators import login_required
 # ...
 class Calendario(View):
     template_name = "calendario.html"
@@ -131,11 +131,7 @@ class PesquisaAnime(ListView):
             return object_list
         else:
             return None
-
-class EditarPerfil(LoginRequiredMixin, TemplateView):
-    template_name = "editarPerfil.html"
-
-
+        
 class Cadastrar(FormView):
     template_name = "cadastrar.html"
     form_class = CriarContaForm
@@ -146,3 +142,39 @@ class Cadastrar(FormView):
 
     def get_success_url(self):
         return reverse('anime:login')
+    
+class EditarPerfil(LoginRequiredMixin, UpdateView):
+    template_name = 'editarperfil.html'
+    model = Usuario
+    fields = ['first_name', 'last_name', 'email'] # na tabela usuário mostra esses campos
+    
+    def get_success_url(self):
+        return reverse('anime:homepage')
+    
+@login_required
+def lista_animes_vistos(request):
+    animes_vistos = request.user.animes_vistos.all()
+    return render(request, 'lista_animes_vistos.html', {'animes_vistos': animes_vistos})
+
+def marcar_visto(request):
+    if request.method == 'POST':
+        anime_id = request.POST.get('anime_id')
+        anime = get_object_or_404(Anime, id=anime_id)
+        if anime in request.user.animes_vistos.all():
+            request.user.animes_vistos.remove(anime)
+        else:
+            request.user.animes_vistos.add(anime)
+    return redirect('anime:detalhesAnime', pk=anime_id)
+
+def desmarcar(request, pk):
+    if request.method == 'POST':
+        anime = get_object_or_404(Anime, id=pk)
+        # Verifica se o anime está na lista de assistidos antes de remover
+        if anime in request.user.animes_vistos.all():
+            request.user.animes_vistos.remove(anime)
+    return redirect('anime:detalhesAnime', pk=pk)
+
+
+class Visualizados(ListView):
+    template_name = "visualizados.html"
+    model = Anime

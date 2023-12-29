@@ -9,8 +9,6 @@ Calendario
     <div class="flex items-center justify-center mb-4 px-20">
         <h2 class="text-3xl font-semibold border-b-2 border-solid border-blue-500">Calendário de Animes</h2>
     </div>
-    
-   <!-- Lista horizontal dos dias da semana -->
     <div class="flex space-x-4 justify-center">
         {% for dia, animes in animes_por_dia.items %}
             <a href="{% url 'anime:calendario' %}?dia={{ dia }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue inline-block">{{ dia }}</a>
@@ -41,6 +39,7 @@ Calendario
         {% else %}
             <p class="py-3">Selecione um dia para ver os animes correspondentes.</p>
         {% endif %}
+    
     </div>
 </div>
 
