@@ -94,9 +94,9 @@ class ListaEpisodios(ListView):
     #object_view é a lista de itens do modelo
 
 
-class Temporada(ListView):
-    template_name = "temporada.html"
-    model = Anime
+# class Temporada(ListView):
+#     template_name = "temporada.html"
+#     model = Anime
     #object_view é a lista de itens do modelo
 
 class DetalhesAnime(DetailView):
