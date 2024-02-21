@@ -1,0 +1,36 @@
+python -m venv venv
+Set-ExecutionPolicy RemoteSigned -Scope Process
+. .\venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install django
+django-admin startproject base .
+python manage.py startapp app
+python manage.py migrate
+python manage.py runserver
+cd base
+(Get-Content settings.py) -replace "('django.contrib.staticfiles',)", "'django.contrib.staticfiles',`r`n    'app'," | Set-Content settings.py
+(Get-Content urls.py) -replace "from django.urls import path", "from django.urls import path, include" | Set-Content urls.py
+(Get-Content urls.py) -replace "path\('admin/', admin.site.urls\)", "path('admin/', admin.site.urls),`r`n    path('', include('app.urls'))" | Set-Content urls.py
+(Get-Content settings.py) -replace "from pathlib import Path", "from pathlib import Path`r`nimport os" | Set-Content settings.py
+(Get-Content settings.py) -replace "'DIRS': \[\]", "'DIRS': [os.path.join(BASE_DIR, 'templates')]" | Set-Content settings.py
+(Get-Content settings.py) -replace "STATIC_URL = '/static/'", "STATIC_URL = '/static/'`r`nSTATICFILES_DIRS = [`r`n    BASE_DIR / 'static',`r`n]`r`nMEDIA_URL = 'media/'`r`nMEDIA_ROOT = BASE_DIR / 'media'" | Set-Content settings.py
+(Get-Content settings.py) -replace "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'", "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'`r`n`r`nLOGIN_REDIRECT_URL = 'app:index'`r`nLOGIN_URL = 'app:index'`r`nLOGOUT_REDIRECT_URL = '/'`r`nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')" | Set-Content settings.py
+cd ..
+mkdir media
+mkdir staticfiles
+mkdir static
+mkdir templates
+cd templates
+echo "base.html" > base.html
+echo "navbar.html" > navbar.html
+echo "footer.html" > footer.html
+cd ..
+cd app
+mkdir templates
+cd templates
+echo "index.html" > index.html
+cd ..
+echo "#forms" > forms.py
+echo "#urls" > urls.py
+cd ..
+
