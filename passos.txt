@@ -5,8 +5,6 @@ python -m pip install --upgrade pip
 pip install django
 django-admin startproject base .
 python manage.py startapp app
-python manage.py migrate
-python manage.py runserver
 cd base
 (Get-Content settings.py) -replace "('django.contrib.staticfiles',)", "'django.contrib.staticfiles',`r`n    'app'," | Set-Content settings.py
 (Get-Content urls.py) -replace "from django.urls import path", "from django.urls import path, include" | Set-Content urls.py
@@ -32,5 +30,8 @@ echo "index.html" > index.html
 cd ..
 echo "#forms" > forms.py
 echo "#urls" > urls.py
+(Get-Content views.py) -replace "(render)", "`$1`r`nfrom django.views import View`r`n`r`nclass Index(View):`r`n    template_name = 'index.html'" | Set-Content views.py
+(Get-Content urls.py) -replace "(#urls)", "`$1`r`nfrom django.urls import path`r`nfrom .views import Index`r`n`r`napp_name = 'app'`r`n`r`nurlpatterns = [`r`n    path('', Index.as_view(), name='index'),`r`n]" | Set-Content urls.py
 cd ..
-
+python manage.py migrate
+python manage.py runserver
